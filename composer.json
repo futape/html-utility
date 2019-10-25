@@ -1,0 +1,19 @@
+{
+    "name": "futape/utility-string",
+    "description": "",
+    "type": "library",
+    "license": "MIT",
+    "require": {
+      "php": "^7.2",
+      "ext-mbstring": "*",
+      "futape/string-utility": "*"
+    },
+    "require-dev": {
+        "phpunit/phpunit": "^8.4"
+    },
+    "autoload": {
+      "psr-4": {
+        "Futape\\Utility\\Html\\": "src/"
+      }
+    }
+}
