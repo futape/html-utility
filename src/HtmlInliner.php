@@ -200,7 +200,7 @@ class HtmlInliner
         $html = preg_replace('/' . $this->getTagPattern(['blockquote', 'q'], false) . '\s*/i', '$0"', $html);
 
         // again &quot;, not ". see line above - no longer relevant
-        $html = preg_replace('/\s*' . $this->getTagPattern(['blockquote', 'q'], false) . '/i', '"$0', $html);
+        $html = preg_replace('/\s*' . $this->getTagPattern(['blockquote', 'q'], true) . '/i', '"$0', $html);
 
         return $html;
     }
