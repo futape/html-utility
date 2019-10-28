@@ -246,11 +246,11 @@ abstract class Html
                 // last discovered closing tag that entered the root level
                 // again ($pointer) and ending before the current tag
                 if ($depth == 0) {
-                    $alteredHtml .= mb_substr($html, $pointer, $tag[0][1] - $pointer);
+                    $alteredHtml .= substr($html, $pointer, $tag[0][1] - $pointer);
                 }
 
                 // If the current tag is a closing one,
-                //decrease the (depth) level of the tag type (tag name) by 1,
+                // decrease the (depth) level of the tag type (tag name) by 1,
                 // otherwise increase it by 1.
                 // Manage the level never to be less than 0
                 $depths[$tagName] = max($depths[$tagName] + ($tag[1][0] != '' ? -1 : 1), 0);
@@ -258,7 +258,7 @@ abstract class Html
                 // Save the position of the current tag's ending to $pointer.
                 // Actually only necessary for the closing tag that is entering the
                 // root level again
-                $pointer = $tag[0][1] + mb_strlen($tag[0][0]);
+                $pointer = $tag[0][1] + strlen($tag[0][0]);
             }
         }
 
@@ -266,7 +266,7 @@ abstract class Html
         // append the text following the last discovered
         // closing tag to the produced content.
         if (array_sum($depths) == 0) {
-            $alteredHtml .= mb_substr($html, $pointer);
+            $alteredHtml .= substr($html, $pointer);
         }
 
         return $alteredHtml;
