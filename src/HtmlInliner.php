@@ -178,7 +178,7 @@ class HtmlInliner
     protected function styleLists(string $html): string
     {
         $html = preg_replace('/\s*' . $this->getTagPattern(['li', 'dd'], true) . '/i', ',$0', $html);
-        $html = preg_replace('/\s*' . $this->getTagPattern('td', true) . '/i', ':$0', $html);
+        $html = preg_replace('/\s*' . $this->getTagPattern('dt', true) . '/i', ':$0', $html);
 
         return $html;
     }
