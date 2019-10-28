@@ -6,7 +6,7 @@
     "require": {
       "php": "^7.2",
       "ext-mbstring": "*",
-      "futape/string-utility": "*"
+      "futape/string-utility": "@dev"
     },
     "require-dev": {
         "phpunit/phpunit": "^8.4"
@@ -15,5 +15,11 @@
       "psr-4": {
         "Futape\\Utility\\Html\\": "src/"
       }
-    }
+    },
+    "repositories": [
+      {
+        "type": "path",
+        "url": "../utility-string"
+      }
+    ]
 }
