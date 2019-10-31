@@ -164,12 +164,14 @@ abstract class Html
     {
         $matches = [];
 
-        if (preg_match(
-            '/^((?:<' . self::TAG_NAME_PATTERN . sprintf(self::ATTRIBUTES_PATTERN, 2) . '>|[^<])*)' .
-                '<plaintext' . sprintf(self::ATTRIBUTES_PATTERN, 3) . '>/is',
-            $html,
-            $matches
-        ) === 1) {
+        if (
+            preg_match(
+                '/^((?:<' . self::TAG_NAME_PATTERN . sprintf(self::ATTRIBUTES_PATTERN, 2) . '>|[^<])*)' .
+                    '<plaintext' . sprintf(self::ATTRIBUTES_PATTERN, 3) . '>/is',
+                $html,
+                $matches
+            ) === 1
+        ) {
             $plain = mb_substr($html, mb_strlen($matches[0]));
             $html = mb_substr($html, 0, mb_strlen($matches[1]));
 
