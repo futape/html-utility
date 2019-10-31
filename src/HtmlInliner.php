@@ -272,13 +272,13 @@ class HtmlInliner
     }
 
     /**
-     * Removes whitespaces from the beginning and end of a string and replace subsequent spaces with one space
+     * Removes whitespaces from the beginning and end of a string and replaces subsequent spaces with one space
      *
      * @param string $value
      * @return string
      */
     protected function collapseSpaces(string $value): string
     {
-        return trim(preg_replace('/ +/', ' ', $value));
+        return trim(preg_replace('/ {2,}/', ' ', $value));
     }
 }
