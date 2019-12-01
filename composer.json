@@ -1,25 +1,19 @@
 {
-    "name": "futape/utility-string",
-    "description": "",
-    "type": "library",
-    "license": "MIT",
-    "require": {
-      "php": "^7.2",
-      "ext-mbstring": "*",
-      "futape/string-utility": "@dev"
-    },
-    "require-dev": {
-        "phpunit/phpunit": "^8.4"
-    },
-    "autoload": {
-      "psr-4": {
-        "Futape\\Utility\\Html\\": "src/"
-      }
-    },
-    "repositories": [
-      {
-        "type": "path",
-        "url": "../utility-string"
-      }
-    ]
+  "name": "futape/html-utility",
+  "description": "A library of HTML utilities",
+  "type": "library",
+  "license": "MIT",
+  "require": {
+    "php": "~7.2.0",
+    "ext-mbstring": "*",
+    "futape/string-utility": "^1.0.0"
+  },
+  "require-dev": {
+    "phpunit/phpunit": "^8.4"
+  },
+  "autoload": {
+    "psr-4": {
+      "Futape\\Utility\\Html\\": "src/"
+    }
+  }
 }
