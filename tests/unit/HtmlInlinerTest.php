@@ -68,6 +68,11 @@ class HtmlInlinerTest extends TestCase
             'Spaces collapsed' => [
                 ['Foo   Bar Baz  Bam'],
                 'Foo Bar Baz Bam'
+            ],
+            'Render fixture' => [
+                [file_get_contents(dirname(__DIR__) . '/fixtures/markup.html')],
+                'A markup file This is just a file containing HTML markup. A list of very important stuff: One, Two, ' .
+                    'And a list of definitions: WWW: World Wide Web, HTTP: Hypertext Transfer Protocol,'
             ]
         ];
 
