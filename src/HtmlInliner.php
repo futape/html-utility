@@ -15,7 +15,16 @@ class HtmlInliner
 
     /** @var string[] */
     protected $tagsToRemove = [
+        // Tables
         'table',
+        'td',
+        'th',
+        'tr',
+        'thead',
+        'tbody',
+        'tfoot',
+        'caption',
+
         'applet',
         'audio',
         'video',
@@ -27,8 +36,6 @@ class HtmlInliner
         'object',
         'iframe',
         'frameset'
-        //'meter'=>true, //don't do this because <meter> requires a content and its appearance depends on the render engine (some browsers simply display the text content). moreover it doesn't allow userinput.
-        //'progress'=>true //same as <meter>, but it doesn't require (but allows) a content. <progress> doesn't allow userinput, too.
     ] + Html::HIDDEN_BLOCK_TAGS;
 
     /**
@@ -110,12 +117,12 @@ class HtmlInliner
         $inline = $this->styleLists($inline);
         $inline = $this->styleQuotes($inline);
         $inline = $this->styleCaptions($inline);
-        $inline = $this->wrapTags($inline, $this->getBlockTags());
+        $inline = $this->spaceTags($inline, Html::SPACED_ELEMENTS);
         $inline = strip_tags(
             $inline,
-            $this->getBlockTagsToRemove() > 0 ? '<' . implode('><', $this->getBlockTagsToRemove()) . '>' : null
+            $this->getTagsToRemove() > 0 ? '<' . implode('><', $this->getTagsToRemove()) . '>' : null
         );
-        $inline = Html::removeTags($inline, $this->getBlockTagsToRemove());
+        $inline = Html::removeTags($inline, $this->getTagsToRemove());
         $inline = html_entity_decode($inline, $this->getOptions());
         if ($plain !== null) {
             $inline .= $plain;
@@ -124,46 +131,6 @@ class HtmlInliner
         $inline = $this->collapseSpaces($inline);
 
         return $inline;
-    }
-
-    /**
-     * @return array
-     */
-    protected function getBlockTags(): array
-    {
-        $blockTags = [];
-        $removeBlockTags = array_flip($this->getBlockTagsToRemove());
-
-        foreach (Html::BLOCK_TAGS as $key => $val) {
-            if (is_array($val)) {
-                $blockTags[] = $key;
-                if (!isset($removeBlockTags[$key])) {
-                    foreach ($val as $subVal) {
-                        if (!isset($removeBlockTags[$subVal])) {
-                            $blockTags[] = $subVal;
-                        }
-                    }
-                }
-            } else {
-                $blockTags[] = $val;
-            }
-        }
-
-        return $blockTags;
-    }
-
-    protected function getBlockTagsToRemove(): array
-    {
-        $removeBlockTags = [];
-
-        foreach ($this->getTagsToRemove() as $tag) {
-            $removeBlockTags[] = $tag;
-            if (isset(Html::BLOCK_TAGS[$tag]) && is_array(Html::BLOCK_TAGS[$tag])) {
-                array_splice($removeBlockTags, count($removeBlockTags), 0, Html::BLOCK_TAGS[$tag]);
-            }
-        }
-
-        return array_unique($removeBlockTags);
     }
 
     /**
@@ -229,7 +196,7 @@ class HtmlInliner
      * @param string|string[] $tagName
      * @return string
      */
-    protected function wrapTags(string $html, $tagName): string
+    protected function spaceTags(string $html, $tagName): string
     {
         return preg_replace('/' . $this->getTagPattern($tagName) . '/i', ' $0', $html);
     }

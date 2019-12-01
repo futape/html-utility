@@ -6,13 +6,15 @@ namespace Futape\Utility\Html;
 
 abstract class Html
 {
-    const BLOCK_TAGS = [
+    const SPACED_ELEMENTS = [
         'aside',
         'article',
         'section',
-        'figure' => [
-            'figcaption'
-        ],
+
+        // Figures
+        'figure',
+        'figcaption',
+
         'footer',
         'header',
         'hgroup',
@@ -28,16 +30,17 @@ abstract class Html
         'div',
         'dialog',
         'dir',
-        'ul' => [
-            'li'
-        ],
-        'ol' => [
-            'li'
-        ],
-        'dl' => [
-            'dt',
-            'dd'
-        ],
+
+        // (Un-)Ordered lists
+        'ul',
+        'ol',
+        'li',
+
+        // Definition lists
+        'dl',
+        'dt',
+        'dd',
+
         'body',
         'center',
         'details',
@@ -49,20 +52,19 @@ abstract class Html
         'plaintext',
         'main',
         'legend',
-        //'meter'=>false, //? - it's an inline element and it must not be empty. thus the author should have ensured that it is separated (by spaces) from its surrounding content (regardless of whether it's rendered as a kind of progressbar or whether its content is printed literally) (moreover it's not an input elem) -> remove from this array
-        //'progress'=>false, //same as <meter>,
-        //'label'=>false,
         'nav',
         'menu',
-        'table' => [
-            'td',
-            'th',
-            'tr',
-            'thead',
-            'tbody',
-            'tfoot',
-            'caption',
-        ],
+
+        // Tables
+        'table',
+        'td',
+        'th',
+        'tr',
+        'thead',
+        'tbody',
+        'tfoot',
+        'caption',
+
         'applet',
         'audio',
         'video',
@@ -73,20 +75,8 @@ abstract class Html
         'select',
         'object',
         'iframe',
-        'frameset',
-        //'meter'=>true, //don't do this because <meter> requires a content and its appearance depends on the render engine (some browsers simply display the text content). moreover it doesn't allow userinput.
-        //'progress'=>true //same as <meter>, but it doesn't require (but allows) a content. <progress> doesn't allow userinput, too.
+        'frameset'
     ];
-
-//    const VOID_TAGS = [
-//        'embed',
-//        'frame',
-//        'input',
-//        'img',
-//        'keygen',
-//        'hr',
-//        'br'
-//    ];
 
     const HIDDEN_BLOCK_TAGS = [
         'noframes',
@@ -101,19 +91,6 @@ abstract class Html
         'colgroup',
         'optgroup',
     ];
-
-//    const HIDDEN_VOID_TAGS = [
-//        'area',
-//        'col',
-//        'param',
-//        'font',
-//        'base',
-//        'basefont',
-//        'link',
-//        'meta',
-//        'source',
-//        'track'
-//    ];
 
     const TAG_NAME_PATTERN = '[^>\s]*';
 

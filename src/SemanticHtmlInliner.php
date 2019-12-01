@@ -27,7 +27,11 @@ class SemanticHtmlInliner extends HtmlInliner
                     'footer',
                     'hgroup',
                     'aside',
+
+                    // Figures
                     'figure',
+                    'figcaption',
+
                     'nav',
                     'menu',
                     'legend'
