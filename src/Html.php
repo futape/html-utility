@@ -144,7 +144,7 @@ abstract class Html
         if (
             preg_match(
                 '/^((?:<' . self::TAG_NAME_PATTERN . sprintf(self::ATTRIBUTES_PATTERN, 2) . '>|[^<])*)' .
-                    '<plaintext' . sprintf(self::ATTRIBUTES_PATTERN, 3) . '>/is',
+                    '<plaintext' . sprintf(self::ATTRIBUTES_PATTERN, 3) . '(?:>|$)/is',
                 $html,
                 $matches
             ) === 1
@@ -169,7 +169,7 @@ abstract class Html
     public static function removeAttributes(string $html): string
     {
         return preg_replace(
-            '/(<' . self::TAG_NAME_PATTERN . ')'. sprintf(self::ATTRIBUTES_PATTERN, 2) . '>?/s',
+            '/(<' . self::TAG_NAME_PATTERN . ')'. sprintf(self::ATTRIBUTES_PATTERN, 2) . '(?:>|$)/s',
             '$1>',
             $html
         );
@@ -193,7 +193,7 @@ abstract class Html
                     },
                     $tagNames
                 )
-            ) . ')' . sprintf(self::ATTRIBUTES_PATTERN, 3) . '>?/is',
+            ) . ')' . sprintf(self::ATTRIBUTES_PATTERN, 3) . '(?:>|$)/is',
             $html,
             $matches,
             PREG_SET_ORDER | PREG_OFFSET_CAPTURE
